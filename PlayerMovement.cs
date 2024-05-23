@@ -12,6 +12,10 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float moveSpeed = 7f;
     [SerializeField] private float jumpForce = 3f;
     [SerializeField] private float maxSpeed = 10f; 
+    public GameObject projectilePrefab;
+    public float timeBetweenShooting = 0.5f; // Adjust as needed
+    private float timeWhenAllowedNextShoot;
+    public float projectileLifetime = 3f;
 
 
 
@@ -34,6 +38,14 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetButtonDown("Jump") && IsGrounded())
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+            for(int i = 0; i < 100; i++)
+            {
+                GameObject projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
+            Destroy(projectile, projectileLifetime);
+            }
+            
+        
+             
         }
 
     }
